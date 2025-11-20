@@ -59,12 +59,51 @@ Note: Keep all the switch faults in off position
   •	Verify the generated waveform using Tabulation and Model Waveform
   
 ## MODEL GRAPH:
-<img width="503" height="479" alt="image" src="https://github.com/user-attachments/assets/9f4fdea5-8f1d-44ae-a75a-8c3737088c0a" />
+
+<img width="703" height="679" alt="image" src="https://github.com/user-attachments/assets/7ed258f4-3677-4b3d-9acb-471cff88afd4" />
 
 ## PROGRAM:
+Am = 7;
+Ac = 14;
+fm = 653;
+fc = 6530;
+fs = 653000;
+t = 0:1/fs:2/fm;
+m = Am * cos(2 * 3.14 * fm * t);
+subplot(4,1,1);
+plot(t, m, 'b');
+title('Message Signal');
+xlabel('Time (s)');
+ylabel('Amplitude');
+c = Ac * cos(2 * 3.14 * fc * t);
+subplot(4,1,2);
+plot(t, c, 'r');
+title('Carrier Signal');
+xlabel('Time (s)');
+ylabel('Amplitude');
+s = (Ac + m) .* cos(2 * 3.14 * fc * t);
+subplot(4,1,3);
+plot(t, s, 'k');
+title('Modulated Signal');
+xlabel('Time (s)');
+ylabel('Amplitude');
+envelope = abs(hilbert(s)); 
+demod = envelope - Ac;
+subplot(4,1,4);
+plot(t, demod, 'g');
+title('Demodulated Signal');
+xlabel('Time (s)');
+ylabel('Amplitude');
+
 
 ## TABULATION:
 
+<img width="720" height="1280" alt="image" src="https://github.com/user-attachments/assets/73afc4fe-d6e4-4335-bddd-f912a85791a3" />
+
+
 ## OUTPUT:
 
+<img width="674" height="572" alt="image" src="https://github.com/user-attachments/assets/36c03ef9-b5be-40e7-a3c5-d3435fd33dcc" />
+
 ## RESULT:
+Thus the DSB-SC-AM Modulation and Demodulation is generated.
